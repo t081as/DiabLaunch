@@ -15,7 +15,9 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DiabLaunch
@@ -28,8 +30,10 @@ namespace DiabLaunch
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// <param name="args">The command line parameters given to the application.</param>
+        /// <returns>An <see cref="int"/> representing the application return code.</returns>
         [STAThread]
-        public static void Main()
+        public static int Main(string[] args)
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
@@ -38,13 +42,13 @@ namespace DiabLaunch
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
             {
                 MessageBox.Show("DiabLaunch requires Microsoft Windows", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return 1;
             }
 
             if (!Environment.Is64BitProcess)
             {
                 MessageBox.Show("DiabLaunch requires a x64 processor", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return 1;
             }
 
             Diablo2 diabloGame;
@@ -56,14 +60,42 @@ namespace DiabLaunch
             catch (FileNotFoundException)
             {
                 MessageBox.Show("DiabLaunch is unable to detect the Diablo 2 directory.\nMake sure that Diablo 2 is installed correctly or copy this application into your Diablo 2 directory.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return 1;
             }
 
-            IntPtr gameWindowHandle = diabloGame.Launch(new string[] { "-w", "-nofixaspect" });
+            IntPtr gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args).ToArray());
 
             ExternalWindow gameWindow = new ExternalWindow(gameWindowHandle);
             gameWindow.RemoveBorder();
             gameWindow.SetPosition(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Prepares the command line arguments given to the game by adding the necessary parameters
+        /// if not present yet.
+        /// </summary>
+        /// <param name="args">The command line arguments given to this application.</param>
+        /// <returns>The processed command line parameters.</returns>
+        private static IEnumerable<string> PrepareCommandLineParameters(string[] args)
+        {
+            const string parameterWindow = "-w";
+            const string parameterAspect = "-nofixaspect";
+
+            var parameters = new List<string>(args);
+
+            if (!parameters.Any(s => s.ToUpperInvariant() == parameterWindow.ToUpperInvariant()))
+            {
+                parameters.Add(parameterWindow);
+            }
+
+            if (!parameters.Any(s => s.ToUpperInvariant() == parameterAspect.ToUpperInvariant()))
+            {
+                parameters.Add(parameterAspect);
+            }
+
+            return parameters;
         }
     }
 }

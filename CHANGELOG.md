@@ -1,3 +1,7 @@
+## X.Y.Z (YYYY-MM-DD)
+
+- *FEATURE:* Command line argument support
+
 ## 0.2.0 (2019-11-15)
 
 - *ENHANCEMENT:* Improved error messages
