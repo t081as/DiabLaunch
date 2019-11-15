@@ -15,7 +15,9 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DiabLaunch
@@ -61,13 +63,39 @@ namespace DiabLaunch
                 return 1;
             }
 
-            IntPtr gameWindowHandle = diabloGame.Launch(new string[] { "-w", "-nofixaspect" });
+            IntPtr gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args).ToArray());
 
             ExternalWindow gameWindow = new ExternalWindow(gameWindowHandle);
             gameWindow.RemoveBorder();
             gameWindow.SetPosition(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
             return 0;
+        }
+
+        /// <summary>
+        /// Prepares the command line arguments given to the game by adding the necessary parameters
+        /// if not present yet.
+        /// </summary>
+        /// <param name="args">The command line arguments given to this application.</param>
+        /// <returns>The processed command line parameters.</returns>
+        private static IEnumerable<string> PrepareCommandLineParameters(string[] args)
+        {
+            const string parameterWindow = "-w";
+            const string parameterAspect = "-nofixaspect";
+
+            var parameters = new List<string>(args);
+
+            if (!parameters.Any(s => s.ToUpperInvariant() == parameterWindow.ToUpperInvariant()))
+            {
+                parameters.Add(parameterWindow);
+            }
+
+            if (!parameters.Any(s => s.ToUpperInvariant() == parameterAspect.ToUpperInvariant()))
+            {
+                parameters.Add(parameterAspect);
+            }
+
+            return parameters;
         }
     }
 }
