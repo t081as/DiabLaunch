@@ -20,7 +20,7 @@ DiabLaunch executes Diablo 2 in windowed mode, removes the window border and set
 ## Note
 Please note that **this tool is neither developed by, nor endorsed by Blizzard Entertainment or its parent company Activision.**
 
-Diablo 2 and its content is ©2000 Blizzard Entertainment, Inc. All rights reserved. Diablo and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
+Diablo 2 and its content is (c) 2000 Blizzard Entertainment, Inc. All rights reserved. Diablo and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
 
 ## Installation
 
