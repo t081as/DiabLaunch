@@ -6,11 +6,11 @@
 [![donate: paypal](https://tobiaskoch.gitlab.io/badges/donate-paypal.svg)](https://www.tk-software.de/donate)
 
 A [Diablo 2](https://www.blizzard.com/de-de/games/d2/) full screen launcher.
+---
+Please note that **this tool is neither developed by, nor endorsed by Blizzard Entertainment or its parent company Activision.**
 
-    Please note that **this tool is neither developed by, nor endorsed by Blizzard Entertainment or its parent company Activision.**
-
-    Diablo 2 and its content is ©2000 Blizzard Entertainment, Inc. All rights reserved. Diablo and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
-
+Diablo 2 and its content is ©2000 Blizzard Entertainment, Inc. All rights reserved. Diablo and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
+---
 Using Microsoft Windows 10 Diablo 2 crashes with the following error message:
 
     UNHANDLED EXCEPTION: ACCESS_VIOLATION (C0000005)
