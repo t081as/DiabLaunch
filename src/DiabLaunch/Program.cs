@@ -28,8 +28,10 @@ namespace DiabLaunch
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// <param name="args">The command line parameters given to the application.</param>
+        /// <returns>An <see cref="int"/> representing the application return code.</returns>
         [STAThread]
-        public static void Main()
+        public static int Main(string[] args)
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
@@ -38,13 +40,13 @@ namespace DiabLaunch
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
             {
                 MessageBox.Show("DiabLaunch requires Microsoft Windows", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return 1;
             }
 
             if (!Environment.Is64BitProcess)
             {
                 MessageBox.Show("DiabLaunch requires a x64 processor", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return 1;
             }
 
             Diablo2 diabloGame;
@@ -56,7 +58,7 @@ namespace DiabLaunch
             catch (FileNotFoundException)
             {
                 MessageBox.Show("DiabLaunch is unable to detect the Diablo 2 directory.\nMake sure that Diablo 2 is installed correctly or copy this application into your Diablo 2 directory.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return 1;
             }
 
             IntPtr gameWindowHandle = diabloGame.Launch(new string[] { "-w", "-nofixaspect" });
@@ -64,6 +66,8 @@ namespace DiabLaunch
             ExternalWindow gameWindow = new ExternalWindow(gameWindowHandle);
             gameWindow.RemoveBorder();
             gameWindow.SetPosition(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+            return 0;
         }
     }
 }
