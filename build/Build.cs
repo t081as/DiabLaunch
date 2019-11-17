@@ -93,7 +93,11 @@ class Build : NukeBuild
             CopyFile(RootDirectory / "AUTHORS.txt", OutputDirectory / "AUTHORS.txt");
             CopyFile(RootDirectory / "CHANGELOG.md", OutputDirectory / "CHANGELOG.txt");
             CopyFile(RootDirectory / "LICENSE.md", OutputDirectory / "LICENSE.txt");
-            CopyFile(RootDirectory / "USAGE.md", OutputDirectory / "README.txt");
+
+            AbsolutePath readmePath = OutputDirectory / "README.txt";
+            CopyFile(RootDirectory / "USAGE.md", readmePath);
+
+            TextFile.ReplaceValues(readmePath, ("{{VERSION_SEMATIC}}", semanticVersion), ("{{VERSION_SHORT}}", shortVersion), ("{{VERSION}}", version));
         });
 
     Target Pack => _ => _
