@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 
 class GitVersion
 {
+    public static string DevMarker => "dev";
+
     public static (string shortVersion, string longVersion, string semanticVersion) Get(string repositoryPath, ulong buildNumber)
     {
         (ulong major, ulong minor, ulong revision, ulong commits, string shasum) = Get(repositoryPath);
@@ -19,7 +21,7 @@ class GitVersion
         }
         else
         {
-            label = $"beta{commits}-{shasum}";
+            label = $"{DevMarker}{commits}-{shasum}";
         }
 
         string shortVersion = $"{major}.{minor}.{revision}";

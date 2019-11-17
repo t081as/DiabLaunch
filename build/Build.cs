@@ -93,6 +93,11 @@ class Build : NukeBuild
             CopyFile(RootDirectory / "AUTHORS.txt", OutputDirectory / "AUTHORS.txt");
             CopyFile(RootDirectory / "CHANGELOG.md", OutputDirectory / "CHANGELOG.txt");
             CopyFile(RootDirectory / "LICENSE.md", OutputDirectory / "LICENSE.txt");
+
+            AbsolutePath readmePath = OutputDirectory / "README.txt";
+            CopyFile(RootDirectory / "USAGE.md", readmePath);
+
+            TextFile.ReplaceValues(readmePath, ("{{VERSION_SEMATIC}}", semanticVersion), ("{{VERSION_SHORT}}", shortVersion), ("{{VERSION}}", version));
         });
 
     Target Pack => _ => _
@@ -106,7 +111,18 @@ class Build : NukeBuild
                 OutputDirectory.GlobFiles("*.deps.json").ForEach(DeleteFile); // If there are any dependencies they will be shipped
                 DeleteFile(OutputDirectory / "DiabLaunch.xml"); // Remove source code documentation xml
 
-                CompressionTasks.CompressZip(OutputDirectory, RootDirectory / $"DiabLaunch-{shortVersion}-win32-x64.zip", null, System.IO.Compression.CompressionLevel.Optimal, System.IO.FileMode.CreateNew);
+                string archiveFileName;
+
+                if (semanticVersion.Contains(GitVersion.DevMarker, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    archiveFileName = $"DiabLaunch-{semanticVersion}-win32-x64.zip";
+                }
+                else
+                {
+                    archiveFileName = $"DiabLaunch-{shortVersion}-win32-x64.zip";
+                }
+
+                CompressionTasks.CompressZip(OutputDirectory, RootDirectory / archiveFileName, null, System.IO.Compression.CompressionLevel.Optimal, System.IO.FileMode.CreateNew);
             }
             else
             {

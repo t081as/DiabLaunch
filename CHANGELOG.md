@@ -1,3 +1,7 @@
+## X.Y.Z (YYYY-MM-DD)
+
+- *ENHANCEMENT:* Readme file added
+
 ## 0.3.0 (2019-11-16)
 
 - *FEATURE:* Command line argument support
