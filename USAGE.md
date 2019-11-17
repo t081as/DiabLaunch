@@ -1,5 +1,5 @@
 # DiabLaunch
-
+Version {{VERSION_SEMATIC}} ({{VERSION_SHORT}})
 [Diablo 2](https://www.blizzard.com/de-de/games/d2/) full screen launcher.
 
 ## Setup
