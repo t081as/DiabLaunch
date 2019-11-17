@@ -109,7 +109,7 @@ class Build : NukeBuild
 
                 string archiveFileName;
 
-                if (semanticVersion.Contains("beta", StringComparison.InvariantCultureIgnoreCase))
+                if (semanticVersion.Contains(GitVersion.DevMarker, StringComparison.InvariantCultureIgnoreCase))
                 {
                     archiveFileName = $"DiabLaunch-{semanticVersion}-win32-x64.zip";
                 }
