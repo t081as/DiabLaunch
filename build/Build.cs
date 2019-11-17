@@ -93,6 +93,7 @@ class Build : NukeBuild
             CopyFile(RootDirectory / "AUTHORS.txt", OutputDirectory / "AUTHORS.txt");
             CopyFile(RootDirectory / "CHANGELOG.md", OutputDirectory / "CHANGELOG.txt");
             CopyFile(RootDirectory / "LICENSE.md", OutputDirectory / "LICENSE.txt");
+            CopyFile(RootDirectory / "USAGE.md", OutputDirectory / "README.txt");
         });
 
     Target Pack => _ => _
