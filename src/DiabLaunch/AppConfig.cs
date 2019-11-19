@@ -21,7 +21,7 @@ namespace DiabLaunch
     /// <summary>
     /// Represents the application configuration.
     /// </summary>
-    public class Configuration
+    public class AppConfig
     {
     }
 }
