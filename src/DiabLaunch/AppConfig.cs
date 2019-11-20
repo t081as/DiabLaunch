@@ -17,6 +17,7 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace DiabLaunch
 {
@@ -40,7 +41,15 @@ namespace DiabLaunch
         /// <exception cref="IOException">Error while writing the configuration.</exception>
         public static void Write(Stream stream, AppConfig appConfig)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(AppConfig));
+                serializer.WriteObject(stream, appConfig);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Error while writing the configuration", ex);
+            }
         }
 
         /// <summary>
@@ -51,7 +60,15 @@ namespace DiabLaunch
         /// <exception cref="IOException">Error while reading the configuration.</exception>
         public static AppConfig Read(Stream stream)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(AppConfig));
+                return (AppConfig)serializer.ReadObject(stream);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException("Error while reading the configuration", ex);
+            }
         }
     }
 }
