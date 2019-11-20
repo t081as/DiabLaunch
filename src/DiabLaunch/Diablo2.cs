@@ -34,7 +34,7 @@ namespace DiabLaunch
         /// </summary>
         public Diablo2()
         {
-            string localPath = this.DetectGameFileSystem();
+            string? localPath = this.DetectGameFileSystem();
 
             if (localPath != null)
             {
@@ -42,7 +42,7 @@ namespace DiabLaunch
             }
             else
             {
-                string registryPath = this.DetectGameRegistry();
+                string? registryPath = this.DetectGameRegistry();
 
                 if (registryPath != null)
                 {
@@ -72,7 +72,7 @@ namespace DiabLaunch
         /// <summary>
         /// Gets the path of the game executable.
         /// </summary>
-        public string InstallPath => Path.GetDirectoryName(this.GamePath);
+        public string InstallPath => Path.GetDirectoryName(this.GamePath) ?? string.Empty;
 
         /// <summary>
         /// Launches the game with the given command line arguments and returns the handle of the game window.
@@ -91,7 +91,7 @@ namespace DiabLaunch
                 diabloLaunchProcess.Start();
             }
 
-            Process diabloGameProcess = null;
+            Process? diabloGameProcess = null;
             while (diabloGameProcess == null || diabloGameProcess.MainWindowHandle.ToInt32() == 0)
             {
                 diabloGameProcess = Process.GetProcessesByName("Game").FirstOrDefault();
@@ -104,7 +104,7 @@ namespace DiabLaunch
         /// Tries to detect the path of the game using the Windows Registry.
         /// </summary>
         /// <returns>The path and filename of the game or <c>null</c> if it could not be detected.</returns>
-        private string DetectGameRegistry()
+        private string? DetectGameRegistry()
         {
             using var registryKey = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32);
             var registryPath = registryKey.OpenSubKey(@"Software\Blizzard Entertainment\Diablo II");
@@ -128,9 +128,9 @@ namespace DiabLaunch
         /// Tries to detect the path of the game using the local file system.
         /// </summary>
         /// <returns>The path and filename of the game or <c>null</c> if it could not be detected.</returns>
-        private string DetectGameFileSystem()
+        private string? DetectGameFileSystem()
         {
-            string fileName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Diablo II.exe");
+            string fileName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, "Diablo II.exe");
 
             if (File.Exists(fileName))
             {

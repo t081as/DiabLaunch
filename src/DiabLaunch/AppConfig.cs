@@ -37,6 +37,7 @@ namespace DiabLaunch
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> that shall be written to.</param>
         /// <param name="appConfig">An <see cref="AppConfig"/> that shall be written.</param>
+        /// <exception cref="IOException">Error while writing the configuration.</exception>
         public static void Write(Stream stream, AppConfig appConfig)
         {
             throw new NotImplementedException();
@@ -47,6 +48,7 @@ namespace DiabLaunch
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> that shall be read.</param>
         /// <returns>The <see cref="AppConfig"/> that has been read.</returns>
+        /// <exception cref="IOException">Error while reading the configuration.</exception>
         public static AppConfig Read(Stream stream)
         {
             throw new NotImplementedException();
