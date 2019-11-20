@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace DiabLaunch
@@ -51,6 +52,20 @@ namespace DiabLaunch
                 return 1;
             }
 
+            AppConfig config = new AppConfig();
+
+            try
+            {
+                using (Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, "Configuration.json")))
+                {
+                    config = AppConfig.Read(stream);
+                }
+            }
+            catch
+            {
+                // Ignore errors and use default configuration
+            }
+
             Diablo2 diabloGame;
 
             try
@@ -63,7 +78,7 @@ namespace DiabLaunch
                 return 1;
             }
 
-            IntPtr gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args).ToArray());
+            IntPtr gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args, config.StretchScreen).ToArray());
 
             ExternalWindow gameWindow = new ExternalWindow(gameWindowHandle);
             gameWindow.RemoveBorder();
@@ -77,8 +92,9 @@ namespace DiabLaunch
         /// if not present yet.
         /// </summary>
         /// <param name="args">The command line arguments given to this application.</param>
+        /// <param name="stretchScreen"><c>True</c> if the game shall be strechted to the whole screen; otherwise <c>False</c>.</param>
         /// <returns>The processed command line parameters.</returns>
-        private static IEnumerable<string> PrepareCommandLineParameters(string[] args)
+        private static IEnumerable<string> PrepareCommandLineParameters(string[] args, bool stretchScreen = true)
         {
             const string parameterWindow = "-w";
             const string parameterAspect = "-nofixaspect";
@@ -90,7 +106,7 @@ namespace DiabLaunch
                 parameters.Add(parameterWindow);
             }
 
-            if (!parameters.Any(s => s.ToUpperInvariant() == parameterAspect.ToUpperInvariant()))
+            if (!parameters.Any(s => s.ToUpperInvariant() == parameterAspect.ToUpperInvariant()) && stretchScreen)
             {
                 parameters.Add(parameterAspect);
             }

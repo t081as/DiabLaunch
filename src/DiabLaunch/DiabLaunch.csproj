@@ -33,6 +33,12 @@
     </PackageReference>
   </ItemGroup>
   
+  <ItemGroup>
+    <None Update="Configuration.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
   <Import Project="..\AssemblyInfo.props" />
   <Import Project="..\Version.props" />
 
