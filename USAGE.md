@@ -18,6 +18,11 @@ Run DiabLaunch to start Diablo 2; the game window will be expanded to full scree
 ### Command line parameters
 Any command-line parameter passed to DiabLaunch on startup will automatically be passed to Diablo 2.
 
+### Configuration.json
+The following configuration parameters are available:
+
+* **stretchScreen**: *true* if DiabLaunch shall append the command line parameter *-nofixaspect*; otherwise *false*
+
 ## Support
 If there are any questions or problems feel free to report them to the official [issue tracker](https://gitlab.com/tobiaskoch/DiabLaunch/issues).
 
