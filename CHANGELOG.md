@@ -1,4 +1,4 @@
-## X.Y.Z (YYYY-MM-DD)
+## 0.4.0 (2019-11-22)
 
 - *ENHANCEMENT:* Readme file added
 - *ENHANCEMENT:* Configuration file added
