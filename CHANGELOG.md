@@ -1,3 +1,7 @@
+## X.Y.Z (YYYY-MM-DD)
+
+- *ENHANCEMENT:* Detection of running instace added
+
 ## 0.4.0 (2019-11-22)
 
 - *ENHANCEMENT:* Readme file added
