@@ -75,6 +75,16 @@ namespace DiabLaunch
         public string InstallPath => Path.GetDirectoryName(this.GamePath) ?? string.Empty;
 
         /// <summary>
+        /// Detects a running game instance and returns the handle of the game window.
+        /// </summary>
+        /// <returns>The handle of the game window or <see cref="IntPtr.Zero"/> if the game has not been detected.</returns>
+        public static IntPtr DetectInstance()
+        {
+            Process? diabloGameProcess = Process.GetProcessesByName("Game").FirstOrDefault();
+            return diabloGameProcess?.MainWindowHandle ?? IntPtr.Zero;
+        }
+
+        /// <summary>
         /// Launches the game with the given command line arguments and returns the handle of the game window.
         /// </summary>
         /// <param name="args">The command line arguments that shall be passed to the game.</param>
