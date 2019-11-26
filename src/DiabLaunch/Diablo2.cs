@@ -30,6 +30,11 @@ namespace DiabLaunch
     public sealed class Diablo2
     {
         /// <summary>
+        /// The process name of the Diablo 2 game process.
+        /// </summary>
+        private const string DiabloProcessName = "Game";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Diablo2"/> class.
         /// </summary>
         public Diablo2()
@@ -80,7 +85,7 @@ namespace DiabLaunch
         /// <returns>The handle of the game window or <see cref="IntPtr.Zero"/> if the game has not been detected.</returns>
         public static IntPtr DetectInstance()
         {
-            Process? diabloGameProcess = Process.GetProcessesByName("Game").FirstOrDefault();
+            Process? diabloGameProcess = Process.GetProcessesByName(DiabloProcessName).FirstOrDefault();
             return diabloGameProcess?.MainWindowHandle ?? IntPtr.Zero;
         }
 
@@ -104,7 +109,7 @@ namespace DiabLaunch
             Process? diabloGameProcess = null;
             while (diabloGameProcess == null || diabloGameProcess.MainWindowHandle.ToInt32() == 0)
             {
-                diabloGameProcess = Process.GetProcessesByName("Game").FirstOrDefault();
+                diabloGameProcess = Process.GetProcessesByName(DiabloProcessName).FirstOrDefault();
             }
 
             return diabloGameProcess.MainWindowHandle;
