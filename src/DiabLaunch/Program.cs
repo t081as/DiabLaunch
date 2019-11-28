@@ -76,7 +76,12 @@ namespace DiabLaunch
                 return 1;
             }
 
-            IntPtr gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args, config.StretchScreen).ToArray());
+            IntPtr gameWindowHandle = Diablo2.DetectRunningInstance();
+
+            if (gameWindowHandle == IntPtr.Zero)
+            {
+                diabloGame.Launch(PrepareCommandLineParameters(args, config.StretchScreen).ToArray());
+            }
 
             ExternalWindow gameWindow = new ExternalWindow(gameWindowHandle);
             gameWindow.RemoveBorder();
