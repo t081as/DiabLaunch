@@ -56,10 +56,8 @@ namespace DiabLaunch
 
             try
             {
-                using (Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, "Configuration.json")))
-                {
-                    config = AppConfig.Read(stream);
-                }
+                using Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, "Configuration.json"));
+                config = AppConfig.Read(stream);
             }
             catch
             {
