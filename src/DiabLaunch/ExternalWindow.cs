@@ -20,7 +20,7 @@ using System.Windows.Forms;
 namespace DiabLaunch
 {
     /// <summary>
-    /// Proviees methods to work with an external native window.
+    /// Provides methods to work with an external native window.
     /// </summary>
     public class ExternalWindow : IWin32Window
     {
