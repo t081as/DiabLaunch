@@ -83,7 +83,7 @@ namespace DiabLaunch
         /// Detects a running game instance and returns the handle of the game window.
         /// </summary>
         /// <returns>The handle of the game window or <see cref="IntPtr.Zero"/> if the game has not been detected.</returns>
-        public static IntPtr DetectInstance()
+        public static IntPtr DetectRunningInstance()
         {
             Process? diabloGameProcess = Process.GetProcessesByName(DiabloProcessName).FirstOrDefault();
             return diabloGameProcess?.MainWindowHandle ?? IntPtr.Zero;
@@ -106,13 +106,13 @@ namespace DiabLaunch
                 diabloLaunchProcess.Start();
             }
 
-            Process? diabloGameProcess = null;
-            while (diabloGameProcess == null || diabloGameProcess.MainWindowHandle.ToInt32() == 0)
+            IntPtr diabloWindowHandle = IntPtr.Zero;
+            while (diabloWindowHandle == IntPtr.Zero)
             {
-                diabloGameProcess = Process.GetProcessesByName(DiabloProcessName).FirstOrDefault();
+                diabloWindowHandle = DetectRunningInstance();
             }
 
-            return diabloGameProcess.MainWindowHandle;
+            return diabloWindowHandle;
         }
 
         /// <summary>
