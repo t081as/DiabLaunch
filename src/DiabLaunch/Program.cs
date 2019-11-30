@@ -80,7 +80,7 @@ namespace DiabLaunch
 
             if (gameWindowHandle == IntPtr.Zero)
             {
-                diabloGame.Launch(PrepareCommandLineParameters(args, config.StretchScreen).ToArray());
+                gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args, config.StretchScreen).ToArray());
             }
 
             ExternalWindow gameWindow = new ExternalWindow(gameWindowHandle);

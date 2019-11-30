@@ -20,6 +20,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Microsoft.Win32;
 
 namespace DiabLaunch
@@ -104,9 +105,11 @@ namespace DiabLaunch
                 diabloLaunchProcess.StartInfo.WorkingDirectory = this.InstallPath;
 
                 diabloLaunchProcess.Start();
+                Thread.Sleep(150);
             }
 
             IntPtr diabloWindowHandle = IntPtr.Zero;
+
             while (diabloWindowHandle == IntPtr.Zero)
             {
                 diabloWindowHandle = DetectRunningInstance();
