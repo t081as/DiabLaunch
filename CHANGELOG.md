@@ -1,4 +1,4 @@
-## X.Y.Z (YYYY-MM-DD)
+## 1.0.0 (2019-11-30)
 
 - *ENHANCEMENT:* Detection of running instace added
 
