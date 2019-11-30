@@ -115,11 +115,11 @@ class Build : NukeBuild
 
                 if (semanticVersion.Contains(GitVersion.DevMarker, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    archiveFileName = $"DiabLaunch-{semanticVersion}-win32-x64.zip";
+                    archiveFileName = $"DiabLaunch-{semanticVersion}-win32-x86_64.zip";
                 }
                 else
                 {
-                    archiveFileName = $"DiabLaunch-{shortVersion}-win32-x64.zip";
+                    archiveFileName = $"DiabLaunch-{shortVersion}-win32-x86_64.zip";
                 }
 
                 CompressionTasks.CompressZip(OutputDirectory, RootDirectory / archiveFileName, null, System.IO.Compression.CompressionLevel.Optimal, System.IO.FileMode.CreateNew);

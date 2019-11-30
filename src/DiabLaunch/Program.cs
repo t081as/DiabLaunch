@@ -56,10 +56,8 @@ namespace DiabLaunch
 
             try
             {
-                using (Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, "Configuration.json")))
-                {
-                    config = AppConfig.Read(stream);
-                }
+                using Stream stream = File.OpenRead(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, "Configuration.json"));
+                config = AppConfig.Read(stream);
             }
             catch
             {
@@ -78,7 +76,12 @@ namespace DiabLaunch
                 return 1;
             }
 
-            IntPtr gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args, config.StretchScreen).ToArray());
+            IntPtr gameWindowHandle = Diablo2.DetectRunningInstance();
+
+            if (gameWindowHandle == IntPtr.Zero)
+            {
+                gameWindowHandle = diabloGame.Launch(PrepareCommandLineParameters(args, config.StretchScreen).ToArray());
+            }
 
             ExternalWindow gameWindow = new ExternalWindow(gameWindowHandle);
             gameWindow.RemoveBorder();

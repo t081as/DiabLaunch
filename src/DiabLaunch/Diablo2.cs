@@ -20,6 +20,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Microsoft.Win32;
 
 namespace DiabLaunch
@@ -29,6 +30,11 @@ namespace DiabLaunch
     /// </summary>
     public sealed class Diablo2
     {
+        /// <summary>
+        /// The process name of the Diablo 2 game process.
+        /// </summary>
+        private const string DiabloProcessName = "Game";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Diablo2"/> class.
         /// </summary>
@@ -75,6 +81,16 @@ namespace DiabLaunch
         public string InstallPath => Path.GetDirectoryName(this.GamePath) ?? string.Empty;
 
         /// <summary>
+        /// Detects a running game instance and returns the handle of the game window.
+        /// </summary>
+        /// <returns>The handle of the game window or <see cref="IntPtr.Zero"/> if the game has not been detected.</returns>
+        public static IntPtr DetectRunningInstance()
+        {
+            Process? diabloGameProcess = Process.GetProcessesByName(DiabloProcessName).FirstOrDefault();
+            return diabloGameProcess?.MainWindowHandle ?? IntPtr.Zero;
+        }
+
+        /// <summary>
         /// Launches the game with the given command line arguments and returns the handle of the game window.
         /// </summary>
         /// <param name="args">The command line arguments that shall be passed to the game.</param>
@@ -89,15 +105,17 @@ namespace DiabLaunch
                 diabloLaunchProcess.StartInfo.WorkingDirectory = this.InstallPath;
 
                 diabloLaunchProcess.Start();
+                Thread.Sleep(150);
             }
 
-            Process? diabloGameProcess = null;
-            while (diabloGameProcess == null || diabloGameProcess.MainWindowHandle.ToInt32() == 0)
+            IntPtr diabloWindowHandle = IntPtr.Zero;
+
+            while (diabloWindowHandle == IntPtr.Zero)
             {
-                diabloGameProcess = Process.GetProcessesByName("Game").FirstOrDefault();
+                diabloWindowHandle = DetectRunningInstance();
             }
 
-            return diabloGameProcess.MainWindowHandle;
+            return diabloWindowHandle;
         }
 
         /// <summary>
