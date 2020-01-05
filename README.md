@@ -24,7 +24,7 @@ Diablo 2 and its content is (c) 2000 Blizzard Entertainment, Inc. All rights res
 
 ## Installation
 
-* DiabLaunch requires the [.NET Core Runtime 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0/runtime)
+* DiabLaunch requires the [.NET Core Runtime 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1/runtime)
 * DiabLaunch supports [xcopy deployment](https://en.wikipedia.org/wiki/XCOPY_deployment) so there is no need for a dedicated installation
 * The Diablo 2 installation path is detected automatically using the [Windows Registry](https://en.wikipedia.org/wiki/Windows_Registry) (if this does not work on your system just copy the application into your Diablo 2 directory)
 
@@ -35,7 +35,7 @@ Binary packages are available here: [https://gitlab.com/tobiaskoch/DiabLaunch/re
 #### Requirements
 The following sdk must be available in order to build DiabLaunch from source:
 
-* [.NET Core SDK 3.0 (Windows)](https://dotnet.microsoft.com/download)
+* [.NET Core SDK 3.1 (Windows)](https://dotnet.microsoft.com/download)
 
 #### Source code
 Get the source code using the following command:
