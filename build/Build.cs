@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using static Mjolnir.Build.IO.TextTasks;
+using static Mjolnir.Build.VCS.GitVersionTasks;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.IO;
@@ -51,25 +53,18 @@ class Build : NukeBuild
     Target Version => _ => _
         .Executes(() =>
         {
+            (string shortVersion, string version, string semanticVersion) = GetGitTagVersion(RootDirectory, Buildnumber);
+
+            Logger.Info($"Version: {version}");
+            Logger.Info($"Short Version: {shortVersion}");
+            Logger.Info($"Semantic Version: {semanticVersion}");
+            Logger.Info($"Buildnumber: {Buildnumber}");
+
             if (Configuration == Configuration.Release)
             {
-                try
-                {
-                    (string shortVersion, string version, string semanticVersion) = GitVersion.Get(RootDirectory, Buildnumber);
-
-                    this.shortVersion = shortVersion;
-                    this.version = version;
-                    this.semanticVersion = semanticVersion;
-                }
-                catch
-                {
-                    Logger.Info("Ignoring version detection problems");
-                }
-
-                Logger.Info($"Version: {version}");
-                Logger.Info($"Short Version: {shortVersion}");
-                Logger.Info($"Semantic Version: {semanticVersion}");
-                Logger.Info($"Buildnumber: {Buildnumber}");
+                this.shortVersion = shortVersion;
+                this.version = version;
+                this.semanticVersion = semanticVersion;
             }
             else
             {
@@ -97,7 +92,7 @@ class Build : NukeBuild
             AbsolutePath readmePath = OutputDirectory / "README.txt";
             CopyFile(RootDirectory / "USAGE.md", readmePath);
 
-            TextFile.ReplaceValues(readmePath, ("{{VERSION_SEMATIC}}", semanticVersion), ("{{VERSION_SHORT}}", shortVersion), ("{{VERSION}}", version));
+            ReplaceInFile(readmePath, ("{{VERSION_SEMATIC}}", semanticVersion), ("{{VERSION_SHORT}}", shortVersion), ("{{VERSION}}", version));
         });
 
     Target Pack => _ => _
@@ -113,7 +108,7 @@ class Build : NukeBuild
 
                 string archiveFileName;
 
-                if (semanticVersion.Contains(GitVersion.DevMarker, StringComparison.InvariantCultureIgnoreCase))
+                if (semanticVersion.Contains(DevMarker, StringComparison.InvariantCultureIgnoreCase))
                 {
                     archiveFileName = $"DiabLaunch-{semanticVersion}-win32-x86_64.zip";
                 }
