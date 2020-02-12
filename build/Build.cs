@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using static Mjolnir.Build.PackageNameTasks;
 using static Mjolnir.Build.IO.TextTasks;
 using static Mjolnir.Build.VCS.GitVersionTasks;
 using Nuke.Common;
@@ -110,11 +111,11 @@ class Build : NukeBuild
 
                 if (semanticVersion.Contains(DevMarker, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    archiveFileName = $"DiabLaunch-{semanticVersion}-win32-x86_64.zip";
+                    archiveFileName = $"{GenerateBinaryPackageName("DiabLaunch", semanticVersion, Mjolnir.Build.OperatingSystem.Windows, Mjolnir.Build.Architecture.X64)}.zip";
                 }
                 else
                 {
-                    archiveFileName = $"DiabLaunch-{shortVersion}-win32-x86_64.zip";
+                    archiveFileName = $"{GenerateBinaryPackageName("DiabLaunch", shortVersion, Mjolnir.Build.OperatingSystem.Windows, Mjolnir.Build.Architecture.X64)}.zip";
                 }
 
                 CompressionTasks.CompressZip(OutputDirectory, RootDirectory / archiveFileName, null, System.IO.Compression.CompressionLevel.Optimal, System.IO.FileMode.CreateNew);

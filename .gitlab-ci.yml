@@ -1,7 +1,15 @@
+.shared_windows_runners:
+    tags:
+    - shared-windows
+    - windows
+    - windows-1809
+
 stages:
     - build
 
 release:
+    extends:
+        - .shared_windows_runners
     stage: build
     only:
         - tags
@@ -12,6 +20,8 @@ release:
     script:
         - ./build --configuration Release --buildnumber $CI_PIPELINE_IID
 debug:
+    extends:
+        - .shared_windows_runners
     stage: build
     script:
         - ./build

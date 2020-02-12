@@ -1,5 +1,5 @@
 ﻿// DiabLaunch - Diablo 2 full screen launcher
-// Copyright (C) 2018-2019  Tobias Koch
+// Copyright (C) 2018-2020  Tobias Koch
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

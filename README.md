@@ -2,6 +2,7 @@
 
 # DiabLaunch
 
+[![pipeline](https://gitlab.com/tobiaskoch/DiabLaunch/badges/master/pipeline.svg)](https://gitlab.com/tobiaskoch/DiabLaunch/pipelines)
 [![maintained: yes](https://tobiaskoch.gitlab.io/badges/maintained-yes.svg)](https://gitlab.com/tobiaskoch/DiabLaunch/commits/master)
 [![donate: paypal](https://tobiaskoch.gitlab.io/badges/donate-paypal.svg)](https://www.tk-software.de/donate)
 
@@ -57,4 +58,4 @@ see [AUTHORS.txt](https://gitlab.com/tobiaskoch/DiabLaunch/blob/master/AUTHORS.t
 Thanks for your interest in this project. You can show your appreciation and support further development by [donating](https://www.tk-software.de/donate).
 
 ## License
-**DiabLaunch** © 2018-2019  [Tobias Koch](https://www.tk-software.de). Released under the [GPL](https://gitlab.com/tobiaskoch/DiabLaunch/blob/master/LICENSE.md).
+**DiabLaunch** © 2018-2020  [Tobias Koch](https://www.tk-software.de). Released under the [GPL](https://gitlab.com/tobiaskoch/DiabLaunch/blob/master/LICENSE.md).

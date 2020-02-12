@@ -1,5 +1,5 @@
 ﻿// DiabLaunch - Diablo 2 full screen launcher
-// Copyright (C) 2018-2019  Tobias Koch
+// Copyright (C) 2018-2020  Tobias Koch
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -61,7 +61,7 @@ namespace DiabLaunch
         /// </summary>
         /// <param name="x">The desired x coordinate.</param>
         /// <param name="y">The desired y coordinate.</param>
-        /// <param name="width">The desired with.</param>
+        /// <param name="width">The desired width.</param>
         /// <param name="height">The desired height.</param>
         public void SetPosition(int x, int y, int width, int height)
         {

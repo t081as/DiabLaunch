@@ -1,21 +1,18 @@
-## 1.0.0 (2019-11-30)
+# Changelog
 
-- *ENHANCEMENT:* Detection of running instace added
+## [1.0.0] - 2019-11-30
+- Added detection of running instance
 
-## 0.4.0 (2019-11-22)
+## [0.4.0] - 2019-11-22
+- Added readme file
+- Added configuration file
 
-- *ENHANCEMENT:* Readme file added
-- *ENHANCEMENT:* Configuration file added
+## [0.3.0] - 2019-11-16
+- Added command line argument support
 
-## 0.3.0 (2019-11-16)
+## [0.2.0] - 2019-11-15
+- Changed error messages
+- Changed game detection
 
-- *FEATURE:* Command line argument support
-
-## 0.2.0 (2019-11-15)
-
-- *ENHANCEMENT:* Improved error messages
-- *ENHANCEMENT:* Improved game detection
-
-## 0.1.0 (2019-11-14)
-
+## [0.1.0] - 2019-11-14
 - Initial release
