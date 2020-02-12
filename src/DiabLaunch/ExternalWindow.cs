@@ -61,7 +61,7 @@ namespace DiabLaunch
         /// </summary>
         /// <param name="x">The desired x coordinate.</param>
         /// <param name="y">The desired y coordinate.</param>
-        /// <param name="width">The desired with.</param>
+        /// <param name="width">The desired width.</param>
         /// <param name="height">The desired height.</param>
         public void SetPosition(int x, int y, int width, int height)
         {
